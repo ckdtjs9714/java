@@ -21,17 +21,7 @@ public class Score extends JFrame{
 		JButton add = new JButton("추가");
 		panel.add(add);
 		
-		add.addActionListener(new ActionListener(){
-			public void actionPerformed1(ActionEvent arg0){
-				
-			}
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		
 		
 		Button korean = new Button("국어점수");
 		JTextField kortext = new JTextField(5);
@@ -54,12 +44,49 @@ public class Score extends JFrame{
 		panel.add(math);
 		panel.add(mathtext);
 		
+		
+		
 		String []title = {"이름","국어점수","영어점수","수학점수","총합","평균"};
 		
 		DefaultTableModel model = new DefaultTableModel(null,title);
 		JTable table = new JTable(model);
 		JScrollPane scroll = new JScrollPane(table);
 		panelA.add(scroll);
+		
+		add.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String inputStr[] = new String[6];
+				
+				inputStr[0] = nametext.getText();
+				inputStr[1] = kortext.getText();
+				inputStr[2] = engtext.getText();
+				inputStr[3] = mathtext.getText();
+				model.addRow(inputStr);
+				nametext.setText("");
+				kortext.setText("");
+				engtext.setText("");
+				mathtext.setText("");
+				
+				
+			}
+		});
+		
+		del.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				if(table.getSelectedRow() == -1)
+				{
+					return;
+				}else{
+					model.removeRow(table.getSelectedRow());
+				}
+			}
+		});
+		
+
 		
 		panel.setLayout(new GridLayout(0,3,10,10));
 		add(panelA);
