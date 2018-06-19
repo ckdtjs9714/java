@@ -5,7 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class Score extends JFrame{
+	
 	public Score(){
+		ScoreDAO dao = new ScoreDAO();
+		ScoreDTO dto = new ScoreDTO();
 		setSize(1200,500);
 		setTitle("MyFrame");
 		
@@ -53,38 +56,53 @@ public class Score extends JFrame{
 		JScrollPane scroll = new JScrollPane(table);
 		panelA.add(scroll);
 		
-		add.addActionListener(new ActionListener(){
+			
+			
+			
+	add.addActionListener(new ActionListener(){
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String inputStr[] = new String[6];
-				
-				inputStr[0] = nametext.getText();
-				inputStr[1] = kortext.getText();
-				inputStr[2] = engtext.getText();
-				inputStr[3] = mathtext.getText();
-				model.addRow(inputStr);
-				nametext.setText("");
-				kortext.setText("");
-				engtext.setText("");
-				mathtext.setText("");
-				
+		public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+//			String inputStr[] = new String[6];
+//			
+//			inputStr[0] = nametext.getText();
+//			inputStr[1] = kortext.getText();
+//			inputStr[2] = engtext.getText();
+//			inputStr[3] = mathtext.getText();
+//			model.addRow(inputStr);
+//			nametext.setText("");
+//			kortext.setText("");
+//				engtext.setText("");
+//			mathtext.setText("");
+			int kor,eng,mat,tot,ave;	
+			
+			kor = Integer.parseInt(kortext.getText());
+			eng = Integer.parseInt(engtext.getText());
+			mat = Integer.parseInt(mathtext.getText());
+			tot = kor+eng+mat;
+			ave = tot/3;
+			dto.setName(nametext.getText());
+			dto.setKor(kor);
+			dto.setEng(eng);
+			dto.setMat(mat);
+			dto.setTot(tot);
+			dto.setAve(ave);
 				
 			}
-		});
-		
-		del.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e){
-				if(table.getSelectedRow() == -1)
-				{
-					return;
-				}else{
-					model.removeRow(table.getSelectedRow());
-				}
-			}
-		});
+	});
+//		
+//		del.addActionListener(new ActionListener(){
+//			@Override
+//			public void actionPerformed(ActionEvent e){
+//				if(table.getSelectedRow() == -1)
+//				{
+//					return;
+//				}else{
+//					model.removeRow(table.getSelectedRow());
+//				}
+//			}
+//		});
 		
 
 		
@@ -97,6 +115,7 @@ public class Score extends JFrame{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Score sc = new Score();
+		
 	}
 
 }
